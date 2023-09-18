@@ -1,0 +1,42 @@
+parameters:
+  - name: pool
+    displayName: 'Agent Pool'
+    type: string
+    default: 'Azure Pipelines'
+    values:
+      - 'Azure Pipelines'
+      - 'Self-hosted'
+
+trigger:
+  tags:
+    include:
+      - '*'
+
+pr:
+  branches:
+    include:
+      - develop
+      - master
+      - main
+
+resources:
+  repositories:
+    - repository: templates
+      endpoint: thenoobsbr
+      type: github
+      name: TheNoobsBr/Azure-Templates
+      ref: refs/tags/1.0.0
+
+variables:
+  - template: variables.yml
+
+stages:
+  - template: templates/gitflow_calculate_version.yml@templates
+    parameters:
+      pool: ${{ parameters.pool }}
+  - template: templates/library_build.yml@templates
+    parameters:
+      pool: ${{ parameters.pool }}
+  - template: templates/library_deploy.yml@templates
+    parameters:
+      pool: ${{ parameters.pool }}
