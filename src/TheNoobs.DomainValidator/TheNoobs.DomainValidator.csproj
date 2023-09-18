@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>TheNoobs.DomainValidator</AssemblyName>
+    <PackageId>TheNoobs.DomainValidator</PackageId>
+    <RootNamespace>TheNoobs.DomainValidator</RootNamespace>
+    <GenerateFullPaths>true</GenerateFullPaths>
+    <OutputType>Library</OutputType>
+    <IsPackable>true</IsPackable>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Authors>The Noobs</Authors>
+    <AssemblyTitle>TheNoobs.DomainValidator</AssemblyTitle>
+    <Description>
+      Library that allows Digest authentication with RestSharp.
+    </Description>
+    <RepositoryType>GIT</RepositoryType>
+    <RepositoryURL>https://github.com/thenoobsbr/domain-validator</RepositoryURL>
+    <PackageProjectUrl>https://github.com/thenoobsbr/domain-validator</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>Domain,Validation,Validator,Exceptionless</PackageTags>
+    <Copyright>The Noobs</Copyright>
+    <PackageIcon>icon.png</PackageIcon>
+    <ReleaseNotesFilePath>$(MSBuildThisFileDirectory)..\..\RELEASES.md</ReleaseNotesFilePath>
+    <PackageReleaseNotes>$([System.IO.File]::ReadAllText('$(ReleaseNotesFilePath)'))</PackageReleaseNotes>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\RELEASES.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\images\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>$(AssemblyName).UnitTests</_Parameter1>
+      <!-- We use the value of AssemblyName to declare the value of the attribute -->
+    </AssemblyAttribute>
+  </ItemGroup>
+</Project>
