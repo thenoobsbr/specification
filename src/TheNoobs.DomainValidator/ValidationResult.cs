@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using TheNoobs.DomainValidator.Abstractions;
+using TheNoobs.DomainValidator.Abstractions.Rules;
+using TheNoobs.DomainValidator.Rules;
 using TheNoobs.DomainValidator.ValueObjects;
 
 namespace TheNoobs.DomainValidator;
@@ -21,6 +23,7 @@ public class ValidationResult<TEntity> : IValidationResult<TEntity>
 
     public TEntity Entity { get; }
 
+    /// <inheritdoc />
     public IEnumerable<IValidationResultProblem> GetProblems()
     {
         if (_problems is null)
@@ -31,15 +34,14 @@ public class ValidationResult<TEntity> : IValidationResult<TEntity>
         return _problems;
     }
 
-    /// <summary>
-    ///     Executes the validation and returns the result.
-    /// </summary>
+    /// <inheritdoc />
     public bool IsSatisfied()
     {
         _problems = _rules.Values.Where(rule => !rule.IsSatisfiedBy(Entity)).Select(rule => new ValidationResultProblem(rule));
         return !_problems.Any();
     }
 
+    /// <inheritdoc />
     public IValidationResult<TEntity> AddRule(ValidationResultCode code, ValidationResultDescription description, Expression<Func<TEntity, bool>> expression)
     {
         var added = _rules.TryAdd(code, new ExpressionRule<TEntity>(code, description, expression));
@@ -51,6 +53,7 @@ public class ValidationResult<TEntity> : IValidationResult<TEntity>
         return this;
     }
 
+    /// <inheritdoc />
     public IValidationResult<TEntity> AddRule(ValidationResultCode code, ValidationResultDescription description, IRuleSpecification<TEntity> specification)
     {
         var added = _rules.TryAdd(code, new SpecificationRule<TEntity>(code, description, specification));

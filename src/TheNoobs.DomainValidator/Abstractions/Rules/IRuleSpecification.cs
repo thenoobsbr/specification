@@ -1,4 +1,4 @@
-﻿namespace TheNoobs.DomainValidator.Abstractions;
+﻿namespace TheNoobs.DomainValidator.Abstractions.Rules;
 
 public interface IRuleSpecification<in TEntity>
 {

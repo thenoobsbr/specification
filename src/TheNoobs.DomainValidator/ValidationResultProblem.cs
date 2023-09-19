@@ -1,5 +1,6 @@
 ﻿using System;
 using TheNoobs.DomainValidator.Abstractions;
+using TheNoobs.DomainValidator.Abstractions.Rules;
 using TheNoobs.DomainValidator.ValueObjects;
 
 namespace TheNoobs.DomainValidator;

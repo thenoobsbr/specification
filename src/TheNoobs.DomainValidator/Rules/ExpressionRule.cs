@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
-using TheNoobs.DomainValidator.Abstractions;
+using TheNoobs.DomainValidator.Abstractions.Rules;
 using TheNoobs.DomainValidator.ValueObjects;
 
-namespace TheNoobs.DomainValidator;
+namespace TheNoobs.DomainValidator.Rules;
 
 public class ExpressionRule<TEntity> : IRule<TEntity>
 {
