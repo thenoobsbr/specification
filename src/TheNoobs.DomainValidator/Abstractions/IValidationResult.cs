@@ -17,6 +17,13 @@ public interface IValidationResult
     ///     Executes the validation and returns the result.
     /// </summary>
     bool IsValid();
+    
+    /// <summary>
+    ///   Executes the validation and returns the result.
+    /// </summary>
+    /// <param name="problems"></param>
+    /// <returns></returns>
+    bool IsValid(out IReadOnlyCollection<IProblem> problems);
 }
 
 public interface IValidationResult<TEntity> : IValidationResult

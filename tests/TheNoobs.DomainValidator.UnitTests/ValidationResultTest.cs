@@ -49,10 +49,9 @@ public class ValidationResultTest
             .Description.Value.Should().Be("Shareholders should be the last name.");
 
         shareholder.FirstName = "John";
-        validationResult.IsValid().Should().BeFalse();
-        validationResult.GetProblems().Should().HaveCount(1);
-        validationResult.GetProblems().First()
-            .Code.Value.Should().Be("SHR003");
+        validationResult.IsValid(out var problems).Should().BeFalse();
+        problems.Should().HaveCount(1);
+        problems.First().Code.Value.Should().Be("SHR003");
         validationResult.GetProblems().First()
             .Description.Value.Should().Be("Shareholders should be the last name.");
 
