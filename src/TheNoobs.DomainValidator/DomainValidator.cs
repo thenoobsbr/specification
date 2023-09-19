@@ -29,31 +29,16 @@ public class DomainValidator
         return validationResult;
     }
 
-    public IReadOnlyCollection<IProblem> GetProblems()
-    {
-        return _problems ?? Array.Empty<IProblem>();
-    }
-
-    public bool IsValid()
-    {
-        foreach (var validationResult in _validationResults.Values)
-        {
-            validationResult.IsValid();
-        }
-
-        _problems = _validationResults.SelectMany(v => v.Value.GetProblems()).ToList();
-        return !_problems.Any();
-    }
-
     public bool IsValid(out IReadOnlyCollection<IProblem> problems)
     {
+        var problemList  = new List<IProblem>();
         foreach (var validationResult in _validationResults.Values)
         {
-            validationResult.IsValid();
+            validationResult.IsValid(out var validationProblems);
+            problemList.AddRange(validationProblems);
         }
 
-        _problems = _validationResults.SelectMany(v => v.Value.GetProblems()).ToList();
-        problems = _problems;
-        return _problems.Any();
+        _problems = problems = problemList;
+        return !_problems.Any();
     }
 }

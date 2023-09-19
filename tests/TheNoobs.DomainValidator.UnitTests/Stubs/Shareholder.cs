@@ -9,9 +9,9 @@ public class Shareholder
     public string LastName { get; set; } = null!;
     public ShareholderDocument Document { get; set; } = null!;
 
-    public void DoValidation(out DomainValidator domainValidator)
+    public DomainValidator DoValidation()
     {
-        domainValidator = new();
+        var domainValidator = new DomainValidator();
         domainValidator
             .For(this)
             .AddRule("SHR001", "Shareholders should be of legal age.", x => x.BirthDate <= DateTime.UtcNow.AddYears(-18))
@@ -19,6 +19,6 @@ public class Shareholder
             .AddRule("SHR003", "Shareholders should be the last name.", x => !string.IsNullOrWhiteSpace(x.LastName))
             .AddRule("SHR004", "Shareholder should be a document.", x => x.Document != null);
         
-        Document.DoValidation(domainValidator);
+        return Document.DoValidation(domainValidator);
     }
 }

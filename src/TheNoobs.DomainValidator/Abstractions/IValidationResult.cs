@@ -9,16 +9,6 @@ namespace TheNoobs.DomainValidator.Abstractions;
 public interface IValidationResult
 {
     /// <summary>
-    ///     Gets the list of validation problems.
-    /// </summary>
-    IEnumerable<IProblem> GetProblems();
-
-    /// <summary>
-    ///     Executes the validation and returns the result.
-    /// </summary>
-    bool IsValid();
-    
-    /// <summary>
     ///   Executes the validation and returns the result.
     /// </summary>
     /// <param name="problems"></param>

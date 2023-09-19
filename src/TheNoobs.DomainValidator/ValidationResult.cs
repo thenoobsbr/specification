@@ -23,19 +23,6 @@ public class ValidationResult<TEntity> : IValidationResult<TEntity>
 
     public TEntity Entity { get; }
 
-    /// <inheritdoc />
-    public IEnumerable<IProblem> GetProblems()
-    {
-        return _problems ?? Array.Empty<IProblem>();
-    }
-
-    /// <inheritdoc />
-    public bool IsValid()
-    {
-        _problems = _rules.Values.Where(rule => !rule.IsSatisfiedBy(Entity)).ToList();
-        return !_problems.Any();
-    }
-
     public bool IsValid(out IReadOnlyCollection<IProblem> problems)
     {
         _problems = _rules.Values.Where(rule => !rule.IsSatisfiedBy(Entity)).ToList();
