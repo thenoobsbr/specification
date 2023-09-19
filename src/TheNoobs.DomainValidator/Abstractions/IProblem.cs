@@ -1,6 +1,6 @@
 ﻿using TheNoobs.DomainValidator.ValueObjects;
 
-namespace TheNoobs.DomainValidator.Abstractions.Rules;
+namespace TheNoobs.DomainValidator.Abstractions;
 
 public interface IProblem
 {

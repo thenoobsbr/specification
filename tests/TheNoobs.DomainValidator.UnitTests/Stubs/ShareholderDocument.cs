@@ -1,4 +1,5 @@
 ﻿using TheNoobs.DomainValidator.Abstractions.Rules;
+using TheNoobs.DomainValidator.Rules;
 
 namespace TheNoobs.DomainValidator.UnitTests.Stubs;
 
@@ -14,7 +15,8 @@ public class ShareholderDocument
     {
         domainValidator
             .For(this)
-            .AddRule("SHRDOC001", "Shareholder document should be valid.", new ShareholderDocumentValiditySpecification());
+            .AddRule("SHRDOC001", "Shareholder document number cannot be null or whitespace.", new IsNotEmptyRuleSpecification<ShareholderDocument>(x => x.Number))
+            .AddRule("SHRDOC002", "Shareholder document should be valid date.", new ShareholderDocumentValiditySpecification());
 
         return domainValidator;
     }

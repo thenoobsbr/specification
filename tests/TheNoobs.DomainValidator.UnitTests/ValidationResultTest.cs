@@ -56,14 +56,26 @@ public class ValidationResultTest
         var shareholder = new Shareholder
         {
             BirthDate = new DateTime(1984, 03, 26),
-            FirstName = "John",
-            LastName = "Wick",
-            Document = new ShareholderDocument()
+            FirstName = string.Empty,
+            LastName = "Wick"
         };
 
         var validator = shareholder.DoValidation();
         validator.IsValid(out var problems).Should().BeFalse();
+        problems.Should().HaveCount(2);
+        problems.Any(x => x.Code == "SHR002").Should().BeTrue();
+        problems.Any(x => x.Code == "SHR004").Should().BeTrue();
+        shareholder.FirstName = "John";
+        validator = shareholder.DoValidation();
+        validator.IsValid(out problems).Should().BeFalse();
         problems.Should().HaveCount(1);
-        problems.First().Code.Value.Should().Be("SHRDOC001");
+        problems.First().Code.Value.Should().Be("SHR004");
+        shareholder.Document = new ShareholderDocument();
+        shareholder.Document.Type = DocumentType.Id;
+        shareholder.Document.Number = "123456789";
+        validator = shareholder.DoValidation();
+        validator.IsValid(out problems).Should().BeFalse();
+        problems.Should().HaveCount(1);
+        problems.First().Code.Value.Should().Be("SHRDOC002");
     }
 }
