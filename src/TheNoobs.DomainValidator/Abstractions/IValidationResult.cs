@@ -16,7 +16,7 @@ public interface IValidationResult
     /// <summary>
     ///     Executes the validation and returns the result.
     /// </summary>
-    bool IsSatisfied();
+    bool IsValid();
 }
 
 public interface IValidationResult<TEntity> : IValidationResult

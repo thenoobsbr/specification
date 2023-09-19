@@ -30,7 +30,7 @@ public class ValidationResult<TEntity> : IValidationResult<TEntity>
     }
 
     /// <inheritdoc />
-    public bool IsSatisfied()
+    public bool IsValid()
     {
         _problems = _rules.Values.Where(rule => !rule.IsSatisfiedBy(Entity));
         return !_problems.Any();
