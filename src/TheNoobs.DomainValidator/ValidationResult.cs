@@ -36,13 +36,29 @@ public class ValidationResult<TEntity> : IValidationResult<TEntity>
     /// </summary>
     public bool IsSatisfied()
     {
-        _problems = _rules.Values.Where(rule => !rule.IsSatisfied(Entity)).Select(rule => new ValidationResultProblem(rule));
+        _problems = _rules.Values.Where(rule => !rule.IsSatisfiedBy(Entity)).Select(rule => new ValidationResultProblem(rule));
         return !_problems.Any();
     }
 
     public IValidationResult<TEntity> AddRule(ValidationResultCode code, ValidationResultDescription description, Expression<Func<TEntity, bool>> expression)
     {
-        _rules.AddOrUpdate(code, new Rule<TEntity>(code, description, expression), (_, rule) => rule);
+        var added = _rules.TryAdd(code, new ExpressionRule<TEntity>(code, description, expression));
+        if (!added)
+        {
+            throw new ArgumentException($"The code {code} already exists.", nameof(code));
+        }
+
+        return this;
+    }
+
+    public IValidationResult<TEntity> AddRule(ValidationResultCode code, ValidationResultDescription description, IRuleSpecification<TEntity> specification)
+    {
+        var added = _rules.TryAdd(code, new SpecificationRule<TEntity>(code, description, specification));
+        if (!added)
+        {
+            throw new ArgumentException($"The code {code} already exists.", nameof(code));
+        }
+
         return this;
     }
 }

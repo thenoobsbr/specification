@@ -10,5 +10,5 @@ public interface IRule
 
 public interface IRule<in TEntity> : IRule
 {
-    bool IsSatisfied(TEntity entity);
+    bool IsSatisfiedBy(TEntity entity);
 }

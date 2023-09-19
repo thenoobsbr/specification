@@ -14,8 +14,8 @@ public class ValidationResultTest
     {
         var shareholder = new Shareholder();
         IValidationResult<Shareholder> validationResult = new ValidationResult<Shareholder>(shareholder);
-        validationResult.IsSatisfied().Should().BeTrue();
         validationResult.GetProblems().Should().BeEmpty();
+        validationResult.IsSatisfied().Should().BeTrue();
 
         shareholder.BirthDate = new DateTime(2021, 01, 01);
         validationResult.AddRule("SHR001", "Shareholders should be of legal age.", x => x.BirthDate <= DateTime.UtcNow.AddYears(-18));
