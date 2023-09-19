@@ -1,4 +1,4 @@
-parameters:
+﻿parameters:
   - name: pool
     displayName: 'Agent Pool'
     type: string
@@ -25,18 +25,18 @@ resources:
       endpoint: thenoobsbr
       type: github
       name: TheNoobsBr/Azure-Templates
-      ref: refs/tags/1.0.0
+      ref: refs/tags/2.1.2
 
 variables:
   - template: variables.yml
 
 stages:
-  - template: templates/gitflow_calculate_version.yml@templates
+  - template: templates/versioning/calculate_sem_version.yml@templates
     parameters:
       pool: ${{ parameters.pool }}
-  - template: templates/library_build.yml@templates
+  - template: templates/csharp/library_build.yml@templates
     parameters:
       pool: ${{ parameters.pool }}
-  - template: templates/library_deploy.yml@templates
+  - template: templates/nuget/publish_package.yml@templates
     parameters:
       pool: ${{ parameters.pool }}
