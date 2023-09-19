@@ -59,4 +59,21 @@ public class ValidationResultTest
         validationResult.IsValid().Should().BeTrue();
         validationResult.GetProblems().Should().BeEmpty();
     }
+
+    [Fact]
+    public void Test2()
+    {
+        var shareholder = new Shareholder
+        {
+            BirthDate = new DateTime(1984, 03, 26),
+            FirstName = "John",
+            LastName = "Wick",
+            Document = new()
+        };
+
+        shareholder.DoValidation(out var validator);
+        validator.IsValid().Should().BeFalse();
+        validator.GetProblems().Should().HaveCount(1);
+        validator.GetProblems().First().Code.Value.Should().Be("SHRDOC001");
+    }
 }
