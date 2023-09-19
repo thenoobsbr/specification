@@ -25,7 +25,7 @@ resources:
       endpoint: thenoobsbr
       type: github
       name: TheNoobsBr/Azure-Templates
-      ref: refs/tags/2.1.2
+      ref: refs/tags/2.2.0
 
 variables:
   - template: variables.yml
