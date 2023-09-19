@@ -22,7 +22,7 @@
     <Authors>The Noobs</Authors>
     <AssemblyTitle>TheNoobs.DomainValidator</AssemblyTitle>
     <Description>
-      Library that allows Digest authentication with RestSharp.
+      A flexible C# library to simplify domain validation in your applications. Customize validation rules, validate in real time and get custom error messages easily.
     </Description>
     <RepositoryType>GIT</RepositoryType>
     <RepositoryURL>https://github.com/thenoobsbr/domain-validator</RepositoryURL>
