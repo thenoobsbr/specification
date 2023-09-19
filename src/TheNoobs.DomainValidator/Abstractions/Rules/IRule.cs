@@ -1,14 +1,6 @@
-﻿using TheNoobs.DomainValidator.ValueObjects;
+﻿namespace TheNoobs.DomainValidator.Abstractions.Rules;
 
-namespace TheNoobs.DomainValidator.Abstractions.Rules;
-
-public interface IRule
-{
-    ValidationResultCode Code { get; }
-    ValidationResultDescription Description { get; }
-}
-
-public interface IRule<in TEntity> : IRule
+public interface IRule<in TEntity> : IProblem
 {
     /// <summary>
     ///     Checks if the rule is satisfied by the entity.

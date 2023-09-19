@@ -11,7 +11,7 @@ public interface IValidationResult
     /// <summary>
     ///     Gets the list of validation problems.
     /// </summary>
-    IEnumerable<IValidationResultProblem> GetProblems();
+    IEnumerable<IProblem> GetProblems();
 
     /// <summary>
     ///     Executes the validation and returns the result.

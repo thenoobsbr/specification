@@ -13,7 +13,7 @@ namespace TheNoobs.DomainValidator;
 public class ValidationResult<TEntity> : IValidationResult<TEntity>
 {
     private readonly ConcurrentDictionary<ValidationResultCode, IRule<TEntity>> _rules;
-    private IEnumerable<ValidationResultProblem>? _problems;
+    private IEnumerable<IProblem>? _problems;
 
     internal ValidationResult(TEntity entity)
     {
@@ -24,20 +24,15 @@ public class ValidationResult<TEntity> : IValidationResult<TEntity>
     public TEntity Entity { get; }
 
     /// <inheritdoc />
-    public IEnumerable<IValidationResultProblem> GetProblems()
+    public IEnumerable<IProblem> GetProblems()
     {
-        if (_problems is null)
-        {
-            return new List<IValidationResultProblem>(0);
-        }
-
-        return _problems;
+        return _problems ?? Array.Empty<IProblem>();
     }
 
     /// <inheritdoc />
     public bool IsSatisfied()
     {
-        _problems = _rules.Values.Where(rule => !rule.IsSatisfiedBy(Entity)).Select(rule => new ValidationResultProblem(rule));
+        _problems = _rules.Values.Where(rule => !rule.IsSatisfiedBy(Entity));
         return !_problems.Any();
     }
 

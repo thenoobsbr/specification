@@ -16,9 +16,13 @@ public class ExpressionRule<TEntity> : IRule<TEntity>
         Description = description ?? throw new ArgumentNullException(nameof(description));
     }
 
+    /// <inheritdoc />
     public ValidationResultCode Code { get; }
+
+    /// <inheritdoc />
     public ValidationResultDescription Description { get; }
 
+    /// <inheritdoc />
     public bool IsSatisfiedBy(TEntity entity)
     {
         return _expression.Compile().Invoke(entity);

@@ -19,9 +19,9 @@ assignees: ''
 
 - **Please tell us about your environment:**
 
-  - Version: `1.0.0`
-  - Platform: `Linux`
-  - Framework: `netcoreapp3.1`
+    - Version: `1.0.0`
+    - Platform: `Linux`
+    - Framework: `netcoreapp3.1`
 
 - **Other information**
 

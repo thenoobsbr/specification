@@ -27,11 +27,11 @@ public class ValidationResultTest
         shareholder.BirthDate = new DateTime(1984, 03, 26);
         validationResult.IsSatisfied().Should().BeTrue();
         validationResult.GetProblems().Should().BeEmpty();
-        
+
         validationResult
             .AddRule("SHR002", "Shareholders should be the first name.", x => !string.IsNullOrWhiteSpace(x.FirstName))
             .AddRule("SHR003", "Shareholders should be the last name.", x => !string.IsNullOrWhiteSpace(x.LastName));
-        
+
         validationResult.IsSatisfied().Should().BeFalse();
         validationResult.GetProblems().Should().HaveCount(2);
         validationResult.GetProblems()
@@ -46,7 +46,7 @@ public class ValidationResultTest
         validationResult.GetProblems()
             .Last(x => x.Code == "SHR003")
             .Description.Value.Should().Be("Shareholders should be the last name.");
-        
+
         shareholder.FirstName = "John";
         validationResult.IsSatisfied().Should().BeFalse();
         validationResult.GetProblems().Should().HaveCount(1);
@@ -54,7 +54,7 @@ public class ValidationResultTest
             .Code.Value.Should().Be("SHR003");
         validationResult.GetProblems().First()
             .Description.Value.Should().Be("Shareholders should be the last name.");
-        
+
         shareholder.LastName = "Wick";
         validationResult.IsSatisfied().Should().BeTrue();
         validationResult.GetProblems().Should().BeEmpty();

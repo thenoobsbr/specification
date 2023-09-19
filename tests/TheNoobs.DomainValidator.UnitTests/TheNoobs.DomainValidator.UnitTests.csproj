@@ -17,10 +17,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="FluentAssertions" Version="6.12.0"/>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2"/>
     <PackageReference Include="NSubstitute" Version="5.1.0"/>
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0"/>
-    <PackageReference Include="xunit" Version="2.5.1" />
+    <PackageReference Include="xunit" Version="2.5.1"/>
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.1">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -31,6 +31,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\TheNoobs.DomainValidator\TheNoobs.DomainValidator.csproj" />
+    <ProjectReference Include="..\..\src\TheNoobs.DomainValidator\TheNoobs.DomainValidator.csproj"/>
   </ItemGroup>
 </Project>

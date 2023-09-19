@@ -15,11 +15,15 @@ public class SpecificationRule<TEntity> : IRule<TEntity>
         Description = description ?? throw new ArgumentNullException(nameof(description));
     }
 
+    /// <inheritdoc />
+    public ValidationResultCode Code { get; }
+
+    /// <inheritdoc />
+    public ValidationResultDescription Description { get; }
+
+    /// <inheritdoc />
     public bool IsSatisfiedBy(TEntity entity)
     {
         return _specification.IsSatisfiedBy(entity);
     }
-
-    public ValidationResultCode Code { get; }
-    public ValidationResultDescription Description { get; }
 }

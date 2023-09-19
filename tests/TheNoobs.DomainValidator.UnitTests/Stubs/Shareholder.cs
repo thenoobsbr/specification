@@ -1,5 +1,8 @@
-﻿namespace TheNoobs.DomainValidator.UnitTests.Stubs;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace TheNoobs.DomainValidator.UnitTests.Stubs;
+
+[ExcludeFromCodeCoverage]
 public class Shareholder
 {
     public DateTime BirthDate { get; set; }

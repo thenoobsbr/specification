@@ -1,16 +1,16 @@
 ﻿using TheNoobs.DomainValidator.ValueObjects;
 
-namespace TheNoobs.DomainValidator.Abstractions;
+namespace TheNoobs.DomainValidator.Abstractions.Rules;
 
-public interface IValidationResultProblem
+public interface IProblem
 {
     /// <summary>
-    ///     Gets the validation result code.
+    ///     Gets the problem code.
     /// </summary>
     ValidationResultCode Code { get; }
 
     /// <summary>
-    ///     Gets the validation result description.
+    ///     Gets the problem description.
     /// </summary>
     ValidationResultDescription Description { get; }
 }
