@@ -1,11 +1,11 @@
-﻿namespace TheNoobs.DomainValidator.Abstractions.Rules;
+﻿namespace TheNoobs.Specification.Abstractions;
 
-public interface IRule<in TEntity> : IProblem
+public interface IRule<in TEntity>
 {
     /// <summary>
     ///     Checks if the rule is satisfied by the entity.
     /// </summary>
     /// <param name="entity"></param>
-    /// <returns>True if rule is satisfied, otherwise false.</returns>
+    /// <returns></returns>
     bool IsSatisfiedBy(TEntity entity);
 }

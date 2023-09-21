@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyName>TheNoobs.DomainValidator</AssemblyName>
-    <PackageId>TheNoobs.DomainValidator</PackageId>
-    <RootNamespace>TheNoobs.DomainValidator</RootNamespace>
+    <PackageId>TheNoobs.Specification</PackageId>
+    <RootNamespace>TheNoobs.Specification</RootNamespace>
     <GenerateFullPaths>true</GenerateFullPaths>
     <OutputType>Library</OutputType>
     <IsPackable>true</IsPackable>
@@ -20,7 +19,7 @@
   <PropertyGroup>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Authors>The Noobs</Authors>
-    <AssemblyTitle>TheNoobs.DomainValidator</AssemblyTitle>
+    <AssemblyTitle>TheNoobs.Specification.Abstractions</AssemblyTitle>
     <Description>
       A flexible C# library to simplify domain validation in your applications. Customize validation rules, validate in real time and get custom error messages easily.
     </Description>

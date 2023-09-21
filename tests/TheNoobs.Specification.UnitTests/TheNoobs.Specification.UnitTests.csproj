@@ -7,6 +7,7 @@
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <LangVersion>latest</LangVersion>
+    <RootNamespace>TheNoobs.Specification.UnitTests</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.18.0"/>
@@ -31,6 +32,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\TheNoobs.DomainValidator\TheNoobs.DomainValidator.csproj"/>
+    <ProjectReference Include="..\..\src\TheNoobs.Specification\TheNoobs.Specification.csproj" />
   </ItemGroup>
 </Project>
