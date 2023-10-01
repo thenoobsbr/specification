@@ -4,18 +4,12 @@ root = true
 [*]
 indent_style = space
 
-# Code files
-[*.{cs, csx, vb, vbx}]
-indent_size = 4
-insert_final_newline = true
-charset = utf-8-bom
-
 # Xml project files
-[*.{csproj, vbproj, vcxproj, vcxproj.filters, proj, projitems, shproj}]
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
 indent_size = 2
 
 # Xml config files
-[*.{props, targets, ruleset, config, nuspec, resx, vsixmanifest, vsct}]
+[*.{props,targets,ruleset,config,nuspec,resx,vsixmanifest,vsct}]
 indent_size = 2
 
 # JSON files
@@ -23,11 +17,15 @@ indent_size = 2
 indent_size = 2
 
 # YAML files
-[*.{yml, yaml}]
+[*.{yml,yaml}]
 indent_size = 2
 
 # Dotnet code style settings:
-[*.{cs, vb}]
+[*.{cs,csx,vb,vbx}]
+max_line_length = 180
+indent_size = 4
+insert_final_newline = true
+charset = utf-8
 dotnet_style_prefer_is_null_check_over_reference_equality_method = true:silent
 dotnet_style_prefer_simplified_boolean_expressions = true:silent
 dotnet_style_prefer_simplified_interpolation = true:silent
