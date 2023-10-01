@@ -4,7 +4,7 @@ using TheNoobs.Specification.Abstractions;
 
 namespace TheNoobs.Specification.Internals;
 
-public static class AndSpecificationComparisonBehaviorFactory<TEntity>
+internal static class AndSpecificationComparisonBehaviorFactory<TEntity>
 {
     public static IAndSpecificationComparisonBehavior<TEntity> Create(SpecificationBehavior behavior)
     {

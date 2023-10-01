@@ -1,6 +1,6 @@
 ﻿namespace TheNoobs.Specification.Abstractions;
 
-public interface ICompositeSpecification<TEntity> : ISpecification<TEntity>
+internal interface ICompositeSpecification<TEntity> : ISpecification<TEntity>
 {
     SpecificationBehavior Behavior { get; }
     

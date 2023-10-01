@@ -39,10 +39,10 @@
     <None Include="..\..\RELEASES.md" Pack="true" PackagePath="\"/>
     <None Include="..\..\images\icon.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
-  <ItemGroup>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-      <_Parameter1>$(AssemblyName).UnitTests</_Parameter1>
-      <!-- We use the value of AssemblyName to declare the value of the attribute -->
-    </AssemblyAttribute>
-  </ItemGroup>
+<!--  <ItemGroup>-->
+<!--    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">-->
+<!--      <_Parameter1>$(AssemblyName).UnitTests</_Parameter1>-->
+<!--      &lt;!&ndash; We use the value of AssemblyName to declare the value of the attribute &ndash;&gt;-->
+<!--    </AssemblyAttribute>-->
+<!--  </ItemGroup>-->
 </Project>

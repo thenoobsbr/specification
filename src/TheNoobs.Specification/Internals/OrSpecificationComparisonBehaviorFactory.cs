@@ -4,7 +4,7 @@ using TheNoobs.Specification.Abstractions;
 
 namespace TheNoobs.Specification.Internals;
 
-public static class OrSpecificationComparisonBehaviorFactory<TEntity>
+internal static class OrSpecificationComparisonBehaviorFactory<TEntity>
 {
     public static IOrSpecificationComparisonBehavior<TEntity> Create(SpecificationBehavior behavior)
     {

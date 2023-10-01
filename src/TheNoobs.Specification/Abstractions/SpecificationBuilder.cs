@@ -23,16 +23,6 @@ public abstract class SpecificationBuilder<TEntity>
         _specification = new RuleSpecification<TEntity>(_behavior, code, description, rule);
     }
 
-    // public ISpecificationItemBuilder<TEntity> Requires(Expression<Func<TEntity, bool>> isSatisfiedByExpression)
-    // {
-    //     return new InitialExpressionSpecificationItemBuilder(isSatisfiedByExpression);
-    // }
-
-    // public static ISpecificationItemBuilder<TEntity> Requires(IRule<TEntity> rule)
-    // {
-    //     return new InitialRuleSpecificationItemBuilder(rule);
-    // }
-
     public SpecificationBuilder<TEntity> And(SpecificationCode code, SpecificationDescription description, Expression<Func<TEntity, bool>> isSatisfiedByExpression)
     {
         _specification = _specification.And(new ExpressionSpecification<TEntity>(_behavior, code, description, isSatisfiedByExpression));

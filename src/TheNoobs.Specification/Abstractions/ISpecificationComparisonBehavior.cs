@@ -2,7 +2,7 @@
 
 namespace TheNoobs.Specification.Abstractions;
 
-public interface ISpecificationComparisonBehavior<TEntity>
+internal interface ISpecificationComparisonBehavior<TEntity>
 {
     SpecificationBehavior Behavior { get; }
 
@@ -14,10 +14,10 @@ public interface ISpecificationComparisonBehavior<TEntity>
         out IEnumerable<IIssue> rightIssues);
 }
 
-public interface IOrSpecificationComparisonBehavior<TEntity> : ISpecificationComparisonBehavior<TEntity>
+internal interface IOrSpecificationComparisonBehavior<TEntity> : ISpecificationComparisonBehavior<TEntity>
 {
 }
 
-public interface IAndSpecificationComparisonBehavior<TEntity> : ISpecificationComparisonBehavior<TEntity>
+internal interface IAndSpecificationComparisonBehavior<TEntity> : ISpecificationComparisonBehavior<TEntity>
 {
 }
