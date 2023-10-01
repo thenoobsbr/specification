@@ -19,11 +19,11 @@ internal class OrSpecification<TEntity> : BaseSpecification<TEntity>
     /// <inheritdoc />
     public override bool IsSatisfiedBy(TEntity entity, out IEnumerable<IIssue> issues)
     {
-        // The validation of both values is done on purpose so that all issues can be obtained at the validation time.
-        var leftIsSatisfied = _left.IsSatisfiedBy(entity, out var leftIssues);
-        var rightIsSatisfied = _right.IsSatisfiedBy(entity, out var rightIssues);
+        var isSatisfied = 
+            _left.IsSatisfiedBy(entity, out var leftIssues)
+            | _right.IsSatisfiedBy(entity, out var rightIssues);
 
-        if (leftIsSatisfied || rightIsSatisfied)
+        if (isSatisfied)
         {
             issues = Enumerable.Empty<IIssue>();
             return true;
