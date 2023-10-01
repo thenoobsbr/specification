@@ -8,9 +8,9 @@ public class IsShareholderAbleBeSentSpecification : ISpecification<Shareholder>
 {
     private readonly ISpecification<Shareholder> _specification;
     
-    public IsShareholderAbleBeSentSpecification()
+    public IsShareholderAbleBeSentSpecification(SpecificationBehavior behavior = SpecificationBehavior.NonCircuitBreaker)
     {
-        _specification = SpecificationBuilder<Shareholder>
+        _specification = new SpecificationBuilder<Shareholder>(behavior)
             .Requires("SH001", "Shareholder last name is required.", s => !string.IsNullOrEmpty(s.LastName))
             .And(s => s.Document != null)
             .WithCodeAndDescription("SH002", "Shareholder document cannot be null.")

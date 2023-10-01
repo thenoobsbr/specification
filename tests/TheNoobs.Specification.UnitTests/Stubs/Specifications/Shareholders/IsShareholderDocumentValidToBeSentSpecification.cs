@@ -10,7 +10,7 @@ public class IsShareholderDocumentValidToBeSentSpecification : ISpecification<Sh
 
     public IsShareholderDocumentValidToBeSentSpecification()
     {
-        _specification = SpecificationBuilder<ShareholderDocument>
+        _specification = new SpecificationBuilder<ShareholderDocument>(SpecificationBehavior.NonCircuitBreaker)
             .Requires("SHD001", "Shareholder document outside of validity.", new IsValidShareholderValidityDocumentRule())
             .Build();
     }

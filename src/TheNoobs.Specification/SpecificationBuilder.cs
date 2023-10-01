@@ -8,36 +8,40 @@ namespace TheNoobs.Specification;
 
 public sealed class SpecificationBuilder<TEntity>
 {
-    private ICompositeSpecification<TEntity> _specification;
+    private readonly SpecificationBehavior _behavior;
+    private ICompositeSpecification<TEntity>? _specification;
 
-    private SpecificationBuilder(ICompositeSpecification<TEntity> specification)
+    public SpecificationBuilder(SpecificationBehavior behavior = SpecificationBehavior.CircuitBreaker)
     {
-        _specification = specification ?? throw new ArgumentNullException(nameof(specification));
+        _behavior = behavior;
     }
 
-    public static SpecificationBuilder<TEntity> Requires(SpecificationCode code, SpecificationDescription description, Expression<Func<TEntity, bool>> isSatisfiedByExpression)
+    public SpecificationBuilder<TEntity> Requires(SpecificationCode code, SpecificationDescription description, Expression<Func<TEntity, bool>> isSatisfiedByExpression)
     {
-        return new SpecificationBuilder<TEntity>(new ExpressionSpecification<TEntity>(code, description, isSatisfiedByExpression));
+        _specification = new ExpressionSpecification<TEntity>(_behavior, code, description, isSatisfiedByExpression);
+        return this;
     }
 
-    public static ISpecificationItemBuilder<TEntity> Requires(Expression<Func<TEntity, bool>> isSatisfiedByExpression)
+    // public ISpecificationItemBuilder<TEntity> Requires(Expression<Func<TEntity, bool>> isSatisfiedByExpression)
+    // {
+    //     return new InitialExpressionSpecificationItemBuilder(isSatisfiedByExpression);
+    // }
+
+    public SpecificationBuilder<TEntity> Requires(SpecificationCode code, SpecificationDescription description, IRule<TEntity> rule)
     {
-        return new InitialExpressionSpecificationItemBuilder(isSatisfiedByExpression);
+        _specification = new RuleSpecification<TEntity>(_behavior, code, description, rule);
+        return this;
     }
 
-    public static SpecificationBuilder<TEntity> Requires(SpecificationCode code, SpecificationDescription description, IRule<TEntity> rule)
-    {
-        return new SpecificationBuilder<TEntity>(new RuleSpecification<TEntity>(code, description, rule));
-    }
-
-    public static ISpecificationItemBuilder<TEntity> Requires(IRule<TEntity> rule)
-    {
-        return new InitialRuleSpecificationItemBuilder(rule);
-    }
+    // public static ISpecificationItemBuilder<TEntity> Requires(IRule<TEntity> rule)
+    // {
+    //     return new InitialRuleSpecificationItemBuilder(rule);
+    // }
 
     public SpecificationBuilder<TEntity> And(SpecificationCode code, SpecificationDescription description, Expression<Func<TEntity, bool>> isSatisfiedByExpression)
     {
-        _specification = new AndSpecification<TEntity>(_specification, new ExpressionSpecification<TEntity>(code, description, isSatisfiedByExpression));
+        // TODO: Resolve possible null reference exception.        
+        _specification = _specification!.And(new ExpressionSpecification<TEntity>(_behavior, code, description, isSatisfiedByExpression));
         return this;
     }
 
@@ -53,18 +57,20 @@ public sealed class SpecificationBuilder<TEntity>
 
     public SpecificationBuilder<TEntity> And(SpecificationCode code, SpecificationDescription description, IRule<TEntity> rule)
     {
-        _specification = new AndSpecification<TEntity>(_specification, new RuleSpecification<TEntity>(code, description, rule));
+        // TODO: Resolve possible null reference exception.
+        _specification = _specification!.And(new RuleSpecification<TEntity>(_behavior, code, description, rule));
         return this;
     }
 
     public ISpecification<TEntity> Build()
     {
-        return _specification;
+        return _specification!;
     }
 
     public SpecificationBuilder<TEntity> Or(SpecificationCode code, SpecificationDescription description, Expression<Func<TEntity, bool>> isSatisfiedByExpression)
     {
-        _specification = new OrSpecification<TEntity>(_specification, new ExpressionSpecification<TEntity>(code, description, isSatisfiedByExpression));
+        // TODO: Resolve possible null reference exception.
+        _specification = _specification!.Or(new ExpressionSpecification<TEntity>(_behavior, code, description, isSatisfiedByExpression));
         return this;
     }
 
@@ -80,7 +86,8 @@ public sealed class SpecificationBuilder<TEntity>
 
     public SpecificationBuilder<TEntity> Or(SpecificationCode code, SpecificationDescription description, IRule<TEntity> rule)
     {
-        _specification = new OrSpecification<TEntity>(_specification, new RuleSpecification<TEntity>(code, description, rule));
+        // TODO: Resolve possible null reference exception.
+        _specification = _specification!.Or(new RuleSpecification<TEntity>(_behavior, code, description, rule));
         return this;
     }
     
@@ -118,35 +125,35 @@ public sealed class SpecificationBuilder<TEntity>
         }
     }
 
-    private sealed class InitialExpressionSpecificationItemBuilder : ISpecificationItemBuilder<TEntity>
-    {
-        private readonly Expression<Func<TEntity, bool>> _isSatisfiedByExpression;
+    // private sealed class InitialExpressionSpecificationItemBuilder : ISpecificationItemBuilder<TEntity>
+    // {
+    //     private readonly Expression<Func<TEntity, bool>> _isSatisfiedByExpression;
+    //
+    //     public InitialExpressionSpecificationItemBuilder(Expression<Func<TEntity, bool>> isSatisfiedByExpression)
+    //     {
+    //         _isSatisfiedByExpression = isSatisfiedByExpression ?? throw new ArgumentNullException(nameof(isSatisfiedByExpression));
+    //     }
+    //
+    //     public SpecificationBuilder<TEntity> WithCodeAndDescription(SpecificationCode code, SpecificationDescription description)
+    //     {
+    //         return Requires(code, description, _isSatisfiedByExpression);
+    //     }
+    // }
 
-        public InitialExpressionSpecificationItemBuilder(Expression<Func<TEntity, bool>> isSatisfiedByExpression)
-        {
-            _isSatisfiedByExpression = isSatisfiedByExpression ?? throw new ArgumentNullException(nameof(isSatisfiedByExpression));
-        }
-
-        public SpecificationBuilder<TEntity> WithCodeAndDescription(SpecificationCode code, SpecificationDescription description)
-        {
-            return Requires(code, description, _isSatisfiedByExpression);
-        }
-    }
-
-    private sealed class InitialRuleSpecificationItemBuilder : ISpecificationItemBuilder<TEntity>
-    {
-        private readonly IRule<TEntity> _rule;
-
-        public InitialRuleSpecificationItemBuilder(IRule<TEntity> rule)
-        {
-            _rule = rule ?? throw new ArgumentNullException(nameof(rule));
-        }
-
-        public SpecificationBuilder<TEntity> WithCodeAndDescription(SpecificationCode code, SpecificationDescription description)
-        {
-            return Requires(code, description, _rule);
-        }
-    }
+    // private sealed class InitialRuleSpecificationItemBuilder : ISpecificationItemBuilder<TEntity>
+    // {
+    //     private readonly IRule<TEntity> _rule;
+    //
+    //     public InitialRuleSpecificationItemBuilder(IRule<TEntity> rule)
+    //     {
+    //         _rule = rule ?? throw new ArgumentNullException(nameof(rule));
+    //     }
+    //
+    //     public SpecificationBuilder<TEntity> WithCodeAndDescription(SpecificationCode code, SpecificationDescription description)
+    //     {
+    //         return Requires(code, description, _rule);
+    //     }
+    // }
 
     private sealed class OrExpressionSpecificationItemBuilder : ISpecificationItemBuilder<TEntity>
     {

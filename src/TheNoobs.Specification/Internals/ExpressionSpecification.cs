@@ -11,12 +11,19 @@ internal class ExpressionSpecification<TEntity> : BaseSpecification<TEntity>
 {
     private readonly Expression<Func<TEntity, bool>> _isSatisfiedByExpression;
 
-    public ExpressionSpecification(SpecificationCode code, SpecificationDescription description, Expression<Func<TEntity, bool>> isSatisfiedByExpression)
+    public ExpressionSpecification(
+        SpecificationBehavior behavior, 
+        SpecificationCode code, 
+        SpecificationDescription description,
+        Expression<Func<TEntity, bool>> isSatisfiedByExpression)
     {
         _isSatisfiedByExpression = isSatisfiedByExpression ?? throw new ArgumentNullException(nameof(isSatisfiedByExpression));
+        Behavior = behavior;
         Code = code ?? throw new ArgumentNullException(nameof(code));
         Description = description ?? throw new ArgumentNullException(nameof(description));
     }
+
+    public override SpecificationBehavior Behavior { get; }
 
     public SpecificationCode Code { get; }
 

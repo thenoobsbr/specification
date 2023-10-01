@@ -2,6 +2,8 @@
 
 public interface ICompositeSpecification<TEntity> : ISpecification<TEntity>
 {
+    SpecificationBehavior Behavior { get; }
+    
     /// <summary>
     ///     Combines the specification with another using the logical AND operator.
     /// </summary>

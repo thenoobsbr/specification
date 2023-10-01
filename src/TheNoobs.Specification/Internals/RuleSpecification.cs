@@ -10,12 +10,19 @@ internal class RuleSpecification<TEntity> : BaseSpecification<TEntity>
 {
     private readonly IRule<TEntity> _rule;
 
-    public RuleSpecification(SpecificationCode code, SpecificationDescription description, IRule<TEntity> rule)
+    public RuleSpecification(
+        SpecificationBehavior behavior,
+        SpecificationCode code,
+        SpecificationDescription description,
+        IRule<TEntity> rule)
     {
         _rule = rule ?? throw new ArgumentNullException(nameof(rule));
+        Behavior = behavior;
         Code = code ?? throw new ArgumentNullException(nameof(code));
         Description = description ?? throw new ArgumentNullException(nameof(description));
     }
+
+    public override SpecificationBehavior Behavior { get; }
 
     public SpecificationCode Code { get; }
 
