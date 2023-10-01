@@ -12,9 +12,9 @@ public class IsShareholderAbleBeSentSpecification : ISpecification<Shareholder>
     {
         _specification = SpecificationBuilder<Shareholder>
             .Requires("SH001", "Shareholder last name is required.", s => !string.IsNullOrEmpty(s.LastName))
-            .And("SH002", "Shareholder document cannot be null.", s => s.Document != null)
+            .And(s => s.Document != null)
+            .WithCodeAndDescription("SH002", "Shareholder document cannot be null.")
             .Build();
-
     }
     
     public bool IsSatisfiedBy(Shareholder entity, out IEnumerable<IIssue> issues)
