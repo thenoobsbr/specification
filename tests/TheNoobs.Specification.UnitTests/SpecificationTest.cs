@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using TheNoobs.Specification.Abstractions;
 using TheNoobs.Specification.UnitTests.Stubs.Entitities;
 using TheNoobs.Specification.UnitTests.Stubs.Specifications.Shareholders;
 using Xunit;
@@ -13,7 +14,7 @@ public class SpecificationTest
     public void Test1()
     {
         var shareholder = new Shareholder("Bernardo", new DateTime(1984, 03, 26));
-        var specification = new IsShareholderAbleBeSentSpecification();
+        var specification = new NonCircuitBreakerIsShareholderAbleBeSentSpecification();
 
         specification.IsSatisfiedBy(shareholder, out var issues).Should().BeFalse();
         issues.Should().HaveCountGreaterThan(1);
@@ -23,7 +24,7 @@ public class SpecificationTest
     public void Test2()
     {
         var shareholder = new Shareholder("Bernardo", new DateTime(1984, 03, 26));
-        var specification = new IsShareholderAbleBeSentSpecification(SpecificationBehavior.CircuitBreaker);
+        var specification = new CircuitBreakerIsShareholderAbleBeSentSpecification();
 
         specification.IsSatisfiedBy(shareholder, out var issues).Should().BeFalse();
         issues.Should().HaveCount(1);

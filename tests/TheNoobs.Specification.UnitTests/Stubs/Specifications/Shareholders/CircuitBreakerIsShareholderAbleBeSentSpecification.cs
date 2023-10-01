@@ -4,13 +4,14 @@ using TheNoobs.Specification.UnitTests.Stubs.Entitities;
 
 namespace TheNoobs.Specification.UnitTests.Stubs.Specifications.Shareholders;
 
-public class IsShareholderAbleBeSentSpecification : ISpecification<Shareholder>
+public class CircuitBreakerIsShareholderAbleBeSentSpecification : ISpecification<Shareholder>
 {
     private readonly ISpecification<Shareholder> _specification;
     
-    public IsShareholderAbleBeSentSpecification(SpecificationBehavior behavior = SpecificationBehavior.NonCircuitBreaker)
+    public CircuitBreakerIsShareholderAbleBeSentSpecification()
     {
-        _specification = new SpecificationBuilder<Shareholder>(behavior)
+        _specification = SpecificationFactory<Shareholder>
+            .CircuitBreaker()
             .Requires("SH001", "Shareholder last name is required.", s => !string.IsNullOrEmpty(s.LastName))
             .And(s => s.Document != null)
             .WithCodeAndDescription("SH002", "Shareholder document cannot be null.")

@@ -10,7 +10,7 @@ internal class RuleSpecification<TEntity> : BaseSpecification<TEntity>
 {
     private readonly IRule<TEntity> _rule;
 
-    public RuleSpecification(
+    internal RuleSpecification(
         SpecificationBehavior behavior,
         SpecificationCode code,
         SpecificationDescription description,
