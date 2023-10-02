@@ -1,4 +1,4 @@
 variables:
-  - group: domain-validator
+  - group: specification
   - group: sonar
   - group: nuget
